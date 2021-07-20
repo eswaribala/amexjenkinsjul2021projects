@@ -1,0 +1,27 @@
+#!groovy
+pipeline{
+ agent any
+ 
+  tools {
+    maven 'maven'
+  }
+ 
+ stages{
+ 
+   stage("build"){
+   
+       steps{
+       
+          bat "mvn -f ./inventoryservicedocker clean install -DskipTests"
+          bat "docker build -f inventoryservicedocker/dockerfile -t invapp-v2 ./inventoryservicedocker"
+          
+         
+       }
+   
+   }
+ 
+ }
+ 
+ 
+ 
+}
